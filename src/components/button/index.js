@@ -1,10 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {
-  bool,
-  string,
-  oneOf,
-} from 'prop-types';
+import { bool, string, oneOf } from 'prop-types';
 
 const Button = ({ type, disabled, className, content, ...rest }) => {
   const props = {
@@ -12,16 +8,12 @@ const Button = ({ type, disabled, className, content, ...rest }) => {
     type,
     disabled,
     className: classNames(
-      (type ? `button-${type}` : 'button-button'),
-      (disabled ? 'button-disabled' : null),
+      type ? `button-${type}` : 'button-button',
+      disabled ? 'button-disabled' : null,
       className,
     ),
   };
-  return (
-    <button {...props}>
-      {content}
-    </button>
-  );
+  return <button {...props}>{content}</button>;
 };
 
 Button.propTypes = {
@@ -34,23 +26,10 @@ Button.propTypes = {
     'multipart/form-data',
     'text/plain',
   ]),
-  formMethod: oneOf([
-    'post',
-    'get',
-  ]),
-  formTarget: oneOf([
-    '_self',
-    '_blank',
-    '_parent',
-    '_top',
-  ]),
+  formMethod: oneOf(['post', 'get']),
+  formTarget: oneOf(['_self', '_blank', '_parent', '_top']),
   name: string.isRequired,
-  type: oneOf([
-    'submit',
-    'reset',
-    'button',
-    'menu',
-  ]),
+  type: oneOf(['submit', 'reset', 'button', 'menu']),
 };
 
 Button.defaultProps = {

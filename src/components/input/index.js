@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  string,
-  bool,
-  oneOf,
-} from 'prop-types';
+import { string, bool, oneOf } from 'prop-types';
 
 import {
   acceptableTypes,

@@ -1,11 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {
-  string,
-  oneOfType,
-  arrayOf,
-  node,
-} from 'prop-types';
+import { string, oneOfType, arrayOf, node } from 'prop-types';
 
 const Label = ({ className, htmlFor, children, text }) => (
   <label htmlFor={htmlFor} className={classNames('form-label', className)}>
@@ -18,10 +13,7 @@ Label.propTypes = {
   className: string,
   htmlFor: string,
   text: string,
-  children: oneOfType([
-    arrayOf(node),
-    node,
-  ]).isRequired,
+  children: oneOfType([arrayOf(node), node]).isRequired,
 };
 
 Label.defaultProps = {

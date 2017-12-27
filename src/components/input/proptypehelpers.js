@@ -62,7 +62,4 @@ const acceptableAutocompleteTypes = [
   'photo',
 ];
 
-export {
-  acceptableTypes,
-  acceptableAutocompleteTypes,
-};
+export { acceptableTypes, acceptableAutocompleteTypes };

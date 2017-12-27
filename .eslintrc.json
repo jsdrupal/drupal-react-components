@@ -1,5 +1,9 @@
 {
-  "extends": "eslint-config-airbnb",
+  "extends": [
+    "eslint-config-airbnb",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
   "parser": "babel-eslint",
   "root": true,
   "env": {
@@ -7,13 +11,8 @@
     "es6": true
   },
   "rules": {
-    "brace-style": ["error", "stroustrup"],
+    "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "object-curly-newline": ["error", {
-        "ObjectExpression": { "minProperties": 1 },
-        "ObjectPattern": { "multiline": true }
-    }],
-    "function-paren-newline": ["error", { "minItems": 3 }],
     "jsx-a11y/label-has-for": [ 2, {
       "components": [ "Label" ],
       "required": {

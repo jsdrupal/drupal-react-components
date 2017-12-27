@@ -6,12 +6,4 @@ import Input from './components/input';
 import Label from './components/label';
 import Select from './components/select';
 
-export {
-  Button,
-  Card,
-  Checkbox,
-  Form,
-  Input,
-  Label,
-  Select,
-};
+export { Button, Card, Checkbox, Form, Input, Label, Select };
