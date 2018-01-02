@@ -19,6 +19,7 @@
         "every": [ "nesting", "id" ]
       },
       "allowChildren": true
-    }]
+    }],
+    "no-param-reassign": ["error", { "props": false }]
   }
 }
