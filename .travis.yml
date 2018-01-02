@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - node
+script:
+  script:
+  - if [ "$TRAVIS_BRANCH" = "deploy" ]; then ./scripts/ci/deploy; fi

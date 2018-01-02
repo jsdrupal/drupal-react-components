@@ -1,12 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const productionPluginDefine = process.env.NODE_ENV === 'production' ? [
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
-  }),
-  new webpack.optimize.UglifyJsPlugin(),
-] : [];
+const productionPluginDefine =
+  process.env.NODE_ENV === 'production'
+    ? [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
+        new webpack.optimize.UglifyJsPlugin(),
+      ]
+    : [];
 
 module.exports = [
   {
@@ -40,7 +43,8 @@ module.exports = [
             presets: [
               '@babel/preset-react',
               [
-                '@babel/preset-env', {
+                '@babel/preset-env',
+                {
                   modules: false,
                   targets: {
                     browsers: ['last 2 versions'],

@@ -1,0 +1,20 @@
+# SETUP GIT
+git checkout deployment
+git config --global user.email "travis@travis-ci.org"
+git config --global user.name "Travis CI"
+
+# INSTALL
+npm i
+
+# BUILD
+npm run build
+
+# ADD BUILT FILES
+git add build/index.js
+git commit --message "Build@$(jq -r '.version' package.json)"
+git status
+git remote set-url origin https://mattgrill:$GITHUBKEY@github.com/jsdrupal/drupal-react-components.git
+git push --set-upstream origin master
+
+# FINISHED
+echo -e "Done!\n"
