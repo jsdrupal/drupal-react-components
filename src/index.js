@@ -5,6 +5,7 @@ import Checkbox from './components/checkbox';
 import Form from './components/form';
 import Input from './components/input';
 import Label from './components/label';
+import { Menu, MenuGroup, MenuItem } from './components/menu';
 import Select from './components/select';
 
 export {
@@ -16,5 +17,8 @@ export {
   Form,
   Input,
   Label,
+  Menu,
+  MenuGroup,
+  MenuItem,
   Select,
 };
