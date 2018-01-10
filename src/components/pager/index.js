@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
 import { number, bool, func } from 'prop-types';
 
-export default class Pagination extends Component {
+export default class Pager extends Component {
   static propTypes = {
     current: number.isRequired,
     total: number.isRequired,
@@ -53,36 +53,21 @@ export default class Pagination extends Component {
 
     return { pager, first, last, current, total, delta, showFirst, showLast };
   };
-  getPrevious = () => {
-    const current = this.state.current - 1;
-    this.setState({
-      ...this.state,
-      ...this.getPager(current),
-    });
-  };
-  getNext = () => {
-    const current = this.state.current + 1;
-    this.setState({
-      ...this.state,
-      ...this.getPager(current),
-    });
-  };
-  getPage = current => {
+  pageTransition = currentPage =>
     this.setState(
       {
         ...this.state,
-        ...this.getPager(current),
+        ...this.getPager(currentPage),
       },
-      () => this.props.handlePageChange(current),
+      () => this.props.handlePageChange(currentPage),
     );
-  };
   render() {
     return (
       <ul style={{ listStyleType: 'none' }}>
         <li style={{ display: 'inline' }}>
           <button
             disabled={this.state.current === 1}
-            onClick={this.getPrevious}
+            onClick={() => this.pageTransition(this.state.current - 1)}
           >
             &lt;
           </button>
@@ -91,7 +76,7 @@ export default class Pagination extends Component {
           this.state.first && (
             <Fragment>
               <li style={{ display: 'inline' }} key="page-1">
-                <button name={1} onClick={() => this.getPage(1)}>
+                <button name={1} onClick={() => this.pageTransition(1)}>
                   {1}
                 </button>
               </li>
@@ -106,7 +91,7 @@ export default class Pagination extends Component {
               currentPage: i === this.state.current || false,
             })}
           >
-            <button name={i} onClick={() => this.getPage(i)}>
+            <button name={i} onClick={() => this.pageTransition(i)}>
               {i}
             </button>
           </li>
@@ -121,7 +106,7 @@ export default class Pagination extends Component {
               >
                 <button
                   name={this.state.total}
-                  onClick={() => this.getPage(this.state.total)}
+                  onClick={() => this.pageTransition(this.state.total)}
                 >
                   {this.state.total}
                 </button>
@@ -131,7 +116,7 @@ export default class Pagination extends Component {
         <li style={{ display: 'inline' }}>
           <button
             disabled={this.state.total <= this.state.current}
-            onClick={this.getNext}
+            onClick={() => this.pageTransition(this.state.current + 1)}
           >
             &gt;
           </button>
