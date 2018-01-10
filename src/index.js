@@ -6,6 +6,7 @@ import Form from './components/form';
 import Input from './components/input';
 import Label from './components/label';
 import { Menu, MenuGroup, MenuItem } from './components/menu';
+import Pagination from './components/pagination';
 import Select from './components/select';
 
 export {
@@ -20,5 +21,6 @@ export {
   Menu,
   MenuGroup,
   MenuItem,
+  Pagination,
   Select,
 };
