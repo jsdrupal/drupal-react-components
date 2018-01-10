@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
-import { number, bool } from 'prop-types';
+import { number, bool, func } from 'prop-types';
 
 export default class Pagination extends Component {
   static propTypes = {
@@ -9,29 +9,38 @@ export default class Pagination extends Component {
     delta: number,
     showFirst: bool,
     showLast: bool,
+    handlePageChange: func,
   };
   static defaultProps = {
     delta: 3,
     showFirst: false,
     showLast: false,
+    handlePageChange() {},
   };
   constructor(props) {
     super(props);
+    const { current, total, delta, showFirst, showLast } = props;
     this.state = {
-      ...props,
-      ...this.getPager(this.props.current, this.props.total),
+      ...this.getPager(current, total, delta, showFirst, showLast),
     };
   }
   componentWillReceiveProps = nextProps => {
+    const { current, total, delta, showFirst, showLast } = nextProps;
+    this.props = { ...this.props, ...nextProps };
     this.setState({
       ...this.state,
-      ...nextProps,
-      ...this.getPager(nextProps.current, nextProps.total),
+      ...this.getPager(current, total, delta, showFirst, showLast),
     });
   };
-  getPager = (current, total) => {
-    const left = current - this.props.delta;
-    const right = current + this.props.delta + 1;
+  getPager = (
+    current,
+    total = this.state.total,
+    delta = this.state.delta,
+    showFirst = this.state.showFirst,
+    showLast = this.state.showLast,
+  ) => {
+    const left = current - delta;
+    const right = current + delta + 1;
     const pager = Array.from(
       {
         length: total,
@@ -39,34 +48,33 @@ export default class Pagination extends Component {
       (v, k) => k + 1,
     ).filter(i => i && i >= left && i < right);
 
-    const first = (this.props.showFirst && pager[0] > 1) || false;
-    const last =
-      (this.props.showLast && pager[pager.length - 1] < total) || false;
+    const first = (showFirst && pager[0] > 1) || false;
+    const last = (showLast && pager[pager.length - 1] < total) || false;
 
-    return { pager, first, last };
+    return { pager, first, last, current, total, delta, showFirst, showLast };
   };
   getPrevious = () => {
     const current = this.state.current - 1;
     this.setState({
       ...this.state,
-      current,
-      ...this.getPager(current, this.state.total),
+      ...this.getPager(current),
     });
   };
   getNext = () => {
     const current = this.state.current + 1;
     this.setState({
       ...this.state,
-      current,
-      ...this.getPager(current, this.state.total),
+      ...this.getPager(current),
     });
   };
   getPage = current => {
-    this.setState({
-      ...this.state,
-      current,
-      ...this.getPager(current, this.state.total),
-    });
+    this.setState(
+      {
+        ...this.state,
+        ...this.getPager(current),
+      },
+      () => this.props.handlePageChange(current),
+    );
   };
   render() {
     return (
@@ -82,7 +90,7 @@ export default class Pagination extends Component {
         {this.state.showFirst &&
           this.state.first && (
             <Fragment>
-              <li style={{ display: 'inline' }}>
+              <li style={{ display: 'inline' }} key="page-1">
                 <button name={1} onClick={() => this.getPage(1)}>
                   {1}
                 </button>
@@ -92,6 +100,7 @@ export default class Pagination extends Component {
           )}
         {this.state.pager.map(i => (
           <li
+            key={`page-${i}`}
             style={{ display: 'inline' }}
             className={classNames({
               currentPage: i === this.state.current || false,
@@ -106,7 +115,10 @@ export default class Pagination extends Component {
           this.state.last && (
             <Fragment>
               <li style={{ display: 'inline' }}>...</li>
-              <li style={{ display: 'inline' }}>
+              <li
+                style={{ display: 'inline' }}
+                key={`page-${this.state.total}`}
+              >
                 <button
                   name={this.state.total}
                   onClick={() => this.getPage(this.state.total)}
