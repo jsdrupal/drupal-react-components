@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';
 import { number, bool, func } from 'prop-types';
 
-export default class Pager extends Component {
+export default class Total extends Component {
   static propTypes = {
     current: number.isRequired,
     total: number.isRequired,
