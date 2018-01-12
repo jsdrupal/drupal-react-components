@@ -6,6 +6,8 @@ import Form from './components/form';
 import Input from './components/input';
 import Label from './components/label';
 import { Menu, MenuGroup, MenuItem } from './components/menu';
+import Total from './components/pager/total';
+import Increment from './components/pager/increment';
 import Select from './components/select';
 
 export {
@@ -20,5 +22,7 @@ export {
   Menu,
   MenuGroup,
   MenuItem,
+  Total as PagerTotal,
+  Increment as PagerIncrement,
   Select,
 };
