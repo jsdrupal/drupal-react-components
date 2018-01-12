@@ -6,10 +6,10 @@
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --display-modules --config webpack.config.js",
     "watch": "NODE_ENV=production ./node_modules/.bin/webpack --progress --watch --config webpack.config.js",
-    "lint": "eslint .",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
     "prettier": "./node_modules/.bin/prettier --write \"{src,stories}/**/*.js\"",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "./node_modules/.bin/start-storybook -p 1337 -c .storybook",
+    "build-storybook": "./node_modules/.bin/build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.34",
