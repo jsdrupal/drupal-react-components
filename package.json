@@ -6,12 +6,19 @@
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --display-modules --config webpack.config.js",
     "watch": "NODE_ENV=production ./node_modules/.bin/webpack --progress --watch --config webpack.config.js",
-    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.js\""
+    "lint": "eslint .",
+    "prettier": "./node_modules/.bin/prettier --write \"{src,stories}/**/*.js\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.34",
     "@babel/preset-env": "^7.0.0-beta.34",
     "@babel/preset-react": "^7.0.0-beta.34",
+    "@storybook/addon-actions": "^3.3.8",
+    "@storybook/addon-links": "^3.3.8",
+    "@storybook/react": "^3.3.8",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-emotion": "^8.0.12",
