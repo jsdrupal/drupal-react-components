@@ -13,6 +13,16 @@
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": [
+          "**/*.test.js",
+          "**/*.spec.js",
+          "stories/*.js",
+          "webpack.config.js"
+        ]
+      }
+    ],
     "jsx-a11y/label-has-for": [ 2, {
       "components": [ "Label" ],
       "required": {
