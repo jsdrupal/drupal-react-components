@@ -19,3 +19,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
        - run: npm run lint
+deployment:
+  dependencies:
+    pre:
+      - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  release:
+    tag: /release-.*/
+    owner: circleci #owner is optional
+    commands:
+      - yarn install
+      - yarn run build
+      - npm publish
