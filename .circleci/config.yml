@@ -1,21 +1,105 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:9.4.0-browsers
+
+whitelist: &whitelist
+  paths:
+    - .eslintignore
+    - .eslintrc.json
+    - .prettierrc.json
+    - webpack.config.js
+    - README.md
+    - package.json
+    - yarn.lock
+    - build/*
+    - src/*
+    - stories/*
+    - node_modules/*
+
 version: 2
 jobs:
-   build:
-     docker:
-       - image: circleci/node:latest-browsers
-     steps:
-       - checkout
-       - restore_cache:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-       - run: yarn run install
-
-       - save_cache:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Lint code
+          command: yarn run lint
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build JavaScript
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          <<: *whitelist
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Write NPM Token to ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run:
+          name: Write version to package.json
+          command: yarn publish --access public
 
-       - run: npm run lint
+workflows:
+  version: 2
+  build:
+    jobs:
+      - checkout
+      - lint:
+          requires:
+            - checkout
+          filters:
+            tags:
+              only: /.*/
+  deploy:
+    jobs:
+      - checkout:
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
+      - build:
+          requires:
+            - checkout
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
