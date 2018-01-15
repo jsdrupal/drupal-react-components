@@ -7,3 +7,5 @@
 .storybook
 .circleci
 webpack.config.js
+now.json
+/storybook-static

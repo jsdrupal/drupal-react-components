@@ -2,3 +2,7 @@
 build/index.js
 .idea
 *.swp
+/storybook-static/static
+/storybook-static/favicon.ico
+/storybook-static/iframe.html
+/storybook-static/index.html

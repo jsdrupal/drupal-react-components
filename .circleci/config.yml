@@ -17,6 +17,7 @@ whitelist: &whitelist
     - src/*
     - stories/*
     - node_modules/*
+    - storybook-static/*
 
 version: 2
 jobs:
@@ -66,8 +67,22 @@ jobs:
           name: Write NPM Token to ~/.npmrc
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
-          name: Write version to package.json
+          name: Deploy to NPM
           command: npm publish --access=public
+  storybook:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build static Storybook Site
+          command: yarn run build-storybook
+      - run:
+          name: Setup Now
+          command: yarn global add now
+      - run:
+          name: Deploy and Alias
+          command: cd storybook-static && now -t ${NOW_TOKEN} . && now -t ${NOW_TOKEN} alias
 
 workflows:
   version: 2
@@ -80,6 +95,22 @@ workflows:
           filters:
             tags:
               only: /.*/
+  storybook:
+    jobs:
+      - checkout:
+          filters:
+            tags:
+              only: /storybook-[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
+      - storybook:
+          requires:
+            - checkout
+          filters:
+            tags:
+              only: /storybook-[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
   deploy:
     jobs:
       - checkout:
