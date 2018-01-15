@@ -8,6 +8,7 @@ whitelist: &whitelist
     - .eslintignore
     - .eslintrc.json
     - .prettierrc.json
+    - .npmignore
     - webpack.config.js
     - README.md
     - package.json
@@ -70,7 +71,7 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  lint:
     jobs:
       - checkout
       - lint:

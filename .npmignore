@@ -1,2 +1,9 @@
 /src
 /stories
+/build/.gitkeep
+.eslintignore
+.eslintrc.json
+.prettierrc.json
+.storybook
+.circleci
+webpack.config.js
