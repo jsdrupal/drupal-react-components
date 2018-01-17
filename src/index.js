@@ -9,6 +9,7 @@ import { Menu, MenuGroup, MenuItem } from './components/menu';
 import Total from './components/pager/total';
 import Increment from './components/pager/increment';
 import Select from './components/select';
+import TableSimple from './components/table/simple';
 
 export {
   Breadcrumb,
@@ -25,4 +26,5 @@ export {
   Total as PagerTotal,
   Increment as PagerIncrement,
   Select,
+  TableSimple,
 };

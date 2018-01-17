@@ -9,18 +9,9 @@ const renderRow = (header, row) => (
   <tr>{Object.keys(header).map(headerKey => renderCell(row[headerKey]))}</tr>
 );
 
-const SimpleTable = ({ header, rows }) => {
-  return (
-    <table>
-      <thead>{Object.values(header).map(item => <th>{item}</th>)}</thead>
-      <tbody>{rows.map(row => renderRow(header, row))}</tbody>
-    </table>
-  );
-};
-
 // @todo Implement it
-const SortableTable = (props) => {
-  const header = props.headerEntries
+const SortableTable = props => {
+  const header = props.headerEntries;
   return (
     <table>
       <TableHeader {...props} />
