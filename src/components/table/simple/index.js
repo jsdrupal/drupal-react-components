@@ -9,16 +9,16 @@ import {
 } from 'prop-types';
 import classNames from 'classnames';
 
-import { TableHeader, TableRows } from './components';
+import { TableHeader, TableRows } from '../helpers';
 
-const SimpleTable = ({ header, rows, classnames }) => (
+const TableSimple = ({ header, rows, classnames }) => (
   <table className={classNames('table-simple', classnames)}>
     <TableHeader {...{ header }} />
     <TableRows {...{ rows }} />
   </table>
 );
 
-SimpleTable.propTypes = {
+TableSimple.propTypes = {
   header: arrayOf(
     shape({
       title: string.isRequired,
@@ -29,8 +29,8 @@ SimpleTable.propTypes = {
   classnames: string,
 };
 
-SimpleTable.defaultProps = {
+TableSimple.defaultProps = {
   classnames: '',
 };
 
-export default SimpleTable;
+export default TableSimple;

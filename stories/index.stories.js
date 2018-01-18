@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Select from '../src/components/select';
 import { Breadcrumb, BreadcrumbItem } from '../src/components/breadcrumb';
 import Button from '../src/components/button';
-import Table from '../src/components/table';
+import TableSimple from '../src';
 
 storiesOf('Welcome', module).add('to Drupal react components', () => (
   <p>Welcome to Drupal react components ...</p>
@@ -30,8 +30,8 @@ storiesOf('Button', module).add('default', () => (
   <Button onClick={action('clicked')} content="Hey this is me" />
 ));
 
-storiesOf('Table', module).add('simple data', () => (
-  <Table
+storiesOf('TableSimple', module).add('simple data', () => (
+  <TableSimple
     header={{ 1: 'Header 1', 2: 'Header 2', 3: 'Header 3' }}
     rows={[
       { 1: 10, 2: 20, 3: 30 },
