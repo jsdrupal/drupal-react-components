@@ -7,12 +7,13 @@
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --display-modules --config webpack.config.js",
     "watch": "./node_modules/.bin/webpack --progress --watch --config webpack.config.js",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
-    "prettier": "./node_modules/.bin/prettier --write \"{src,stories}/**/*.js\"",
+    "prettier": "./node_modules/.bin/prettier --write '{src,stories}/**/*.js' 'webpack.config.js'",
     "storybook": "./node_modules/.bin/start-storybook -p 1337 -c .storybook",
     "build-storybook": "./node_modules/.bin/build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.34",
+    "@babel/polyfill": "^7.0.0-beta.38",
     "@babel/preset-env": "^7.0.0-beta.34",
     "@babel/preset-react": "^7.0.0-beta.34",
     "@storybook/addon-actions": "^3.3.8",
@@ -21,6 +22,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-loader": "8.0.0-beta.0",
+    "babel-minify-webpack-plugin": "^0.2.0",
     "babel-plugin-emotion": "^8.0.12",
     "babel-plugin-transform-class-properties": "7.0.0-beta.3",
     "babel-plugin-transform-object-rest-spread": "7.0.0-beta.3",

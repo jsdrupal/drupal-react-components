@@ -1,3 +1,5 @@
+import '@babel/polyfill';
+
 import { Breadcrumb, BreadcrumbItem } from './components/breadcrumb';
 import Button from './components/button';
 import Card from './components/card';
