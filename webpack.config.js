@@ -50,11 +50,11 @@ module.exports = [
                   useBuiltIns: 'entry',
                   targets: {
                     browsers: [
-                      'Chrome >= 62',
-                      'Edge >= 15',
-                      'FireFox >= 56',
-                      'Safari >= 11',
-                      'Opera >= 47',
+                      'chrome >= 62',
+                      'edge >= 15',
+                      'fireFox >= 56',
+                      'safari >= 11',
+                      'opera >= 47',
                     ],
                   },
                 },
