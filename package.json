@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --display-modules --config webpack.config.js",
-    "watch": "NODE_ENV=production ./node_modules/.bin/webpack --progress --watch --config webpack.config.js",
+    "watch": "./node_modules/.bin/webpack --progress --watch --config webpack.config.js",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
     "prettier": "./node_modules/.bin/prettier --write \"{src,stories}/**/*.js\"",
     "storybook": "./node_modules/.bin/start-storybook -p 1337 -c .storybook",
