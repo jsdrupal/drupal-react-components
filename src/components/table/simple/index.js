@@ -11,15 +11,15 @@ import classNames from 'classnames';
 
 import { TableHeader, TableRows } from '../helpers';
 
-const TableSimple = ({ header, rows, classnames }) => (
+const TableSimple = ({ headers, rows, classnames }) => (
   <table className={classNames('table-simple', classnames)}>
-    <TableHeader {...{ header }} />
+    <TableHeader {...{ headers }} />
     <TableRows {...{ rows }} />
   </table>
 );
 
 TableSimple.propTypes = {
-  header: arrayOf(
+  headers: arrayOf(
     shape({
       title: string.isRequired,
       key: string.isRequired,

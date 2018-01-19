@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Select from '../src/components/select';
 import { Breadcrumb, BreadcrumbItem } from '../src/components/breadcrumb';
 import Button from '../src/components/button';
-import TableSimple from '../src';
+import { TableSimple, TableSortable } from '../src';
 
 storiesOf('Welcome', module).add('to Drupal react components', () => (
   <p>Welcome to Drupal react components ...</p>
@@ -32,12 +32,21 @@ storiesOf('Button', module).add('default', () => (
 
 storiesOf('TableSimple', module).add('simple data', () => (
   <TableSimple
-    header={{ 1: 'Header 1', 2: 'Header 2', 3: 'Header 3' }}
-    rows={[
-      { 1: 10, 2: 20, 3: 30 },
-      { 1: 11, 2: 21, 3: 31 },
-      { 1: 12, 2: 22, 3: 32 },
+    headers={[
+      { title: 'Animal', key: 'animal' },
+      { title: 'Height', key: 'height' },
     ]}
+    rows={[{ animal: 'Dog', height: 200 }, { animal: 'Cat', height: 150 }]}
+  />
+));
+
+storiesOf('TableSortable', module).add('simple data', () => (
+  <TableSortable
+    headers={[
+      { title: 'Animal', key: 'animal' },
+      { title: 'Height', key: 'height' },
+    ]}
+    rows={[{ animal: 'Dog', height: 200 }, { animal: 'Cat', height: 150 }]}
   />
 ));
 

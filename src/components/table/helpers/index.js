@@ -8,9 +8,9 @@ import {
   shape,
 } from 'prop-types';
 
-const TableHeader = ({ header }) => (
+const TableHeader = ({ headers }) => (
   <thead>
-    <tr>{header.map(data => <th key={data.key}>{data.title}</th>)}</tr>
+    <tr>{headers.map(data => <th key={data.key}>{data.title}</th>)}</tr>
   </thead>
 );
 
@@ -30,7 +30,7 @@ const TableRows = ({ rows }) => (
 );
 
 TableHeader.propTypes = {
-  header: arrayOf(
+  headers: arrayOf(
     shape({
       title: string.isRequired,
       key: string.isRequired,
