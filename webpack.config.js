@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const Minify = require('babel-minify-webpack-plugin');
 
 const productionPluginDefine =
   process.env.NODE_ENV === 'production'
@@ -7,7 +8,7 @@ const productionPluginDefine =
         new webpack.DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('production'),
         }),
-        new webpack.optimize.UglifyJsPlugin(),
+        new Minify(),
       ]
     : [];
 
@@ -46,8 +47,15 @@ module.exports = [
                 '@babel/preset-env',
                 {
                   modules: false,
+                  useBuiltIns: 'entry',
                   targets: {
-                    browsers: ['last 2 versions'],
+                    browsers: [
+                      'Chrome >= 62',
+                      'Edge >= 15',
+                      'FireFox >= 56',
+                      'Safari >= 11',
+                      'Opera >= 47',
+                    ],
                   },
                 },
               ],
