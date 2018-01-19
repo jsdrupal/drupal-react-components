@@ -6,6 +6,7 @@ import {
   string,
   number,
   shape,
+  func,
 } from 'prop-types';
 import classNames from 'classnames';
 
@@ -21,13 +22,17 @@ const TableSortable = class TableSortable extends Component {
     ).isRequired,
     rows: arrayOf(objectOf(oneOfType([string, number]))).isRequired,
     classnames: string,
+    sortHandler: func,
   };
   static defaultProps = {
     classnames: '',
+    sortHandler: null,
   };
   constructor(props) {
     super(props);
-    const { rows, headers } = props;
+    const { rows, headers, sortHandler } = props;
+    this.sort =
+      sortHandler && sortHandler instanceof Function ? sortHandler : this.sort;
     this.state = {
       rows,
       headers: headers.map(header => ({ ...header, sortDirection: 'asc' })),
@@ -45,18 +50,18 @@ const TableSortable = class TableSortable extends Component {
       })),
     });
   }
-  sort = (key, direction) => {
+  sort = ({ key, sortDirection }) => {
     const headers = this.state.headers.map(
       header =>
         header.key === key
           ? {
               ...header,
-              sortDirection: (direction === 'desc' && 'asc') || 'desc',
+              sortDirection: (sortDirection === 'desc' && 'asc') || 'desc',
             }
           : header,
     );
     const rows = this.state.rows.sort(
-      (a, b) => (direction === 'asc' ? a[key] > b[key] : a[key] < b[key]),
+      (a, b) => (sortDirection === 'asc' ? a[key] > b[key] : a[key] < b[key]),
     );
     this.setState(prevState => ({ ...prevState, headers, rows }));
   };
@@ -65,16 +70,16 @@ const TableSortable = class TableSortable extends Component {
       <table className={classNames('table-sortable', this.props.classnames)}>
         <thead>
           <tr>
-            {this.state.headers.map(data => (
-              <th key={`${data.key}-${data.sortDirection}`}>
+            {this.state.headers.map(({ key, sortDirection, title }) => (
+              <th key={`${key}-${sortDirection}`}>
                 <span
-                  className={`${data.key} ${data.sortDirection}`}
-                  onKeyPress={() => this.sort(data.key, data.sortDirection)}
-                  onClick={() => this.sort(data.key, data.sortDirection)}
+                  className={`${key} ${sortDirection}`}
+                  onKeyPress={() => this.sort({ key, sortDirection })}
+                  onClick={() => this.sort({ key, sortDirection })}
                   tabIndex={0}
                   role="button"
                 >
-                  {data.title}
+                  {title}
                 </span>
               </th>
             ))}
