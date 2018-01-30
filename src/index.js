@@ -4,6 +4,7 @@ import { Breadcrumb, BreadcrumbItem } from './components/breadcrumb';
 import Button from './components/button';
 import Card from './components/card';
 import Checkbox from './components/checkbox';
+import DatePicker from './components/date';
 import Form from './components/form';
 import Input from './components/input';
 import Label from './components/label';
@@ -20,6 +21,7 @@ export {
   Button,
   Card,
   Checkbox,
+  DatePicker,
   Form,
   Input,
   Label,
