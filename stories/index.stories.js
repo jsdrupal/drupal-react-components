@@ -6,7 +6,14 @@ import { action } from '@storybook/addon-actions';
 import Select from '../src/components/select';
 import { Breadcrumb, BreadcrumbItem } from '../src/components/breadcrumb';
 import Button from '../src/components/button';
-import { TableSimple, TableSortable } from '../src';
+import {
+  TableSimple,
+  TableSortable,
+  Menu,
+  MenuGroup,
+  MenuItem,
+  Link,
+} from '../src';
 
 storiesOf('Welcome', module).add('to Drupal react components', () => (
   <p>Welcome to Drupal react components ...</p>
@@ -59,4 +66,43 @@ storiesOf('Select', module).add('default', () => (
     ]}
     onChange={action('selected')}
   />
+));
+
+storiesOf('Menus', module).add('to Drupal react components', () => (
+  <Menu>
+    <MenuItem>
+      <MenuGroup toggle={'Content'}>
+        <MenuItem>
+          <a href="#">Content</a>
+        </MenuItem>
+        <MenuItem>
+          <a href="#">Comments</a>
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup toggle={'Structure'}>
+        <MenuItem>
+          <a href="#">Content types</a>
+        </MenuItem>
+        <MenuItem>
+          <a href="#">Block layout</a>
+        </MenuItem>
+        <MenuItem>
+          <a href="#">Menus</a>
+        </MenuItem>
+        <MenuItem>
+          <a href="#">Views</a>
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup toggle={'Configuration'}>
+        <MenuGroup toggle={<a href="#">System</a>}>
+          <MenuItem>
+            <a href="#">Basic site settings</a>
+          </MenuItem>
+          <MenuItem>
+            <a href="#">Cron</a>
+          </MenuItem>
+        </MenuGroup>
+      </MenuGroup>
+    </MenuItem>
+  </Menu>
 ));
