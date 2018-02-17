@@ -6,14 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Select from '../src/components/select';
 import { Breadcrumb, BreadcrumbItem } from '../src/components/breadcrumb';
 import Button from '../src/components/button';
-import {
-  TableSimple,
-  TableSortable,
-  Menu,
-  MenuGroup,
-  MenuItem,
-  Link,
-} from '../src';
+import { TableSimple, TableSortable, Menu, MenuGroup, MenuItem } from '../src';
 
 storiesOf('Welcome', module).add('to Drupal react components', () => (
   <p>Welcome to Drupal react components ...</p>
@@ -71,35 +64,35 @@ storiesOf('Select', module).add('default', () => (
 storiesOf('Menus', module).add('to Drupal react components', () => (
   <Menu>
     <MenuItem>
-      <MenuGroup toggle={'Content'}>
+      <MenuGroup toggle="Content">
         <MenuItem>
-          <a href="#">Content</a>
+          <div>Content</div>
         </MenuItem>
         <MenuItem>
-          <a href="#">Comments</a>
-        </MenuItem>
-      </MenuGroup>
-      <MenuGroup toggle={'Structure'}>
-        <MenuItem>
-          <a href="#">Content types</a>
-        </MenuItem>
-        <MenuItem>
-          <a href="#">Block layout</a>
-        </MenuItem>
-        <MenuItem>
-          <a href="#">Menus</a>
-        </MenuItem>
-        <MenuItem>
-          <a href="#">Views</a>
+          <div>Comments</div>
         </MenuItem>
       </MenuGroup>
-      <MenuGroup toggle={'Configuration'}>
-        <MenuGroup toggle={<a href="#">System</a>}>
+      <MenuGroup toggle="Structure">
+        <MenuItem>
+          <div>Content types</div>
+        </MenuItem>
+        <MenuItem>
+          <div>Block layout</div>
+        </MenuItem>
+        <MenuItem>
+          <div>Menus</div>
+        </MenuItem>
+        <MenuItem>
+          <div>Views</div>
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup toggle="Configuration">
+        <MenuGroup toggle={<div>System</div>}>
           <MenuItem>
-            <a href="#">Basic site settings</a>
+            <div>Basic site settings</div>
           </MenuItem>
           <MenuItem>
-            <a href="#">Cron</a>
+            <div>Cron</div>
           </MenuItem>
         </MenuGroup>
       </MenuGroup>
