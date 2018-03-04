@@ -2,7 +2,9 @@
 
 # Installation
 
-Install it!
+```
+yarn add drupal-react-components
+```
 
 ## Development
 
